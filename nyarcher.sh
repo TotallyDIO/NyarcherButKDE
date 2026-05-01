@@ -172,7 +172,10 @@ install_flatpaks() {
 }
 
 add_nyarch_repo() {
-tee -a "#  Repos For Nyarch Apps\n[nyarch_repo]\nInclude = /etc/pacman.d/mirrorlist-nyarch" >> /etc/pacman.conf
+echo '
+#  Server For Nyarch
+[nyarch-repo]
+Include = /etc/pacman.d/mirrorlist-nyarch' | sudo tee -a /etc/pacman.conf 
 }
 install_nyarch_apps() {
   
