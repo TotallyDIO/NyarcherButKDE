@@ -184,19 +184,12 @@ Server = http://nymirror.nyarchlinux.moe/pub/linux/nyarch/
 Server = https://mousecorp.xyz/pub/linux/nyarch/packages/$arch/
 ' | sudo tee /etc/pacman.d/mirrorlist-nyarch
 }
+
 install_nyarch_apps() {
 add_nyarch_repo
-sudo pacman -S -needed --noconfirm nyarch-keyring
+sudo pacman -S --needed --noconfirm nyarch-keyring
 sudo pacman -Sy
-sudo pacman -S --needed --noconfirm nyarch{tour,script,customize,assistant,updater,wizard}
-}
-
-install_nyarch_updater() {
-  # Install Nyarch Updater
-  cd /tmp
-  wget https://github.com/nyarchlinux/nyarchupdater/releases/latest/download/nyarchupdater.flatpak
-  flatpak install nyarchupdater.flatpak
-  sudo bash -c 'echo 241104 > /version'
+sudo pacman -S --needed --noconfirm nyarch{tour,script,customize,assistant,updater,wizard} nekoplay catgirldownloader adwaita-material-you
 }
 
 configure_gsettings() {
@@ -314,6 +307,5 @@ then
   configure_gsettings
   echo "Gnome settings updated"
 fi
-
 
 echo -e "$RED Log out and login to see the results! $NC"
