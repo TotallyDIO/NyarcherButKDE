@@ -187,6 +187,7 @@ Server = https://mousecorp.xyz/pub/linux/nyarch/packages/$arch/
 
 install_nyarch_apps() {
 add_nyarch_repo
+sudo pacman -Sy
 sudo pacman -S --needed --noconfirm nyarch-keyring
 sudo pacman -Sy
 sudo pacman -S --needed --noconfirm nyarch{tour,script,customize,assistant,updater,wizard} nekoplay catgirldownloader adwaita-material-you
