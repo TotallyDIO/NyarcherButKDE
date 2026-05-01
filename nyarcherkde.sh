@@ -11,19 +11,19 @@ curl https://raw.githubusercontent.com/NyarchLinux/NyarchLinux/main/Gnome/etc/sk
 echo -e "$RED\n\nWelcome to Nyarch Linux customization installer! $NC"
 
 
-check_gnome_version() {
-  GNOME_VERSION=`gnome-session --version`
-  GNOME_VERSION_NUMBER=${GNOME_VERSION##* }
-  GNOME_VERSION_MAJOR=${GNOME_VERSION_NUMBER%%.*}
-  if [ "$GNOME_VERSION_MAJOR" -lt 47 ]; then
-    echo "You need Gnome version 47 or above."
+check_kde_version() {
+  KDE_VERSION=`plasmashell --version`
+  KDE_VERSION_NUMBER=${GNOME_VERSION##* }
+  KDE_VERSION_MAJOR=${GNOME_VERSION_NUMBER%%.*}
+  if [ "$KDE_VERSION_MAJOR" -lt 6.6 ]; then
+    echo "You need KDE Plasma version 6.6 or above."
     exit
   fi
 }
 
 check_gnome_is_running() {
   CURRENT_ENV=${XDG_CURRENT_DESKTOP,,}
-  if [[ $CURRENT_ENV != *"gnome"* ]]; then
+  if [[ $CURRENT_ENV != *"KDE"* ]]; then
     echo "Gnome isn't running, please launch gnome environment first"
     exit
   fi
@@ -171,19 +171,9 @@ install_flatpaks() {
   flatpak install flathub it.mijorus.gearlever
 }
 
-add_nyarch_repo() {
-tee -a "#  Repos For Nyarch Apps\n[nyarch_repo]\nInclude = /etc/pacman.d/mirrorlist-nyarch" >> /etc/pacman.conf
-}
 install_nyarch_apps() {
-  
-}
-
-install_nyarch_updater() {
-  # Install Nyarch Updater
   cd /tmp
-  wget https://github.com/nyarchlinux/nyarchupdater/releases/latest/download/nyarchupdater.flatpak
-  flatpak install nyarchupdater.flatpak
-  sudo bash -c 'echo 241104 > /version'
+  
 }
 
 configure_gsettings() {
