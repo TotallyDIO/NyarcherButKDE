@@ -1,5 +1,5 @@
 #!/bin/bash
-
+VERSION= 26.04
 LATEST_TAG_VERSION=`curl -s https://api.github.com/repos/NyarchLinux/NyarchLinux/releases/latest | grep "tag_name" | awk -F'"' '/tag_name/ {print $4}'`
 RELEASE_LINK="github.com/NyarchLinux/NyarchLinux/releases/latest/download/"
 
@@ -31,8 +31,8 @@ check_gnome_is_running() {
 
 get_tarball() {
   if [ "$tarball_downloaded" = "false" ]; then
-    file_path=/tmp/NyarchLinux.tar.gz
-    url=${RELEASE_LINK}NyarchLinux.tar.gz
+    file_path=/tmp/NyarchLinux-26.04.tar.gz
+    url=${RELEASE_LINK}NyarchLinux-26.04.tar.gz
 
     echo "Downloading Nyarch tarball from $url"
     wget -q -O "$file_path" "$url"
@@ -51,9 +51,10 @@ install_extensions () {
   echo "Backup old extensions to extensions-backup..."
   mv -f extensions extensions-backup  # Backup old extensions 
 
-  cp -rf /tmp/NyarchLinuxComp/Gnome/etc/skel/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell
+  cp -rf /tmp/NyarchLinux-/Gnome/etc/skel/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell
   
   # Install material you
+  sudo pacman -S --needed --no-confirm make
   cd /tmp
   git clone https://github.com/FrancescoCaracciolo/material-you-colors.git
   cd material-you-colors
@@ -293,13 +294,6 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
   install_nyarch_apps
   echo "Nyarch apps installed!"
-fi
-
-read -r -p "[SYSTEM] Do you want to install Nyarch Updater? It's going to have some issues outside of Nyarch and Arch in general (Y/n): " response
-if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
-then
-  install_nyarch_updater
-  echo "Nyarch Updater installed!"
 fi
 
 read -r -p "Do you want to edit your Gnome settings? Note that if you have not installed something before, you may experience some bugs at the start (Y/n): " response
