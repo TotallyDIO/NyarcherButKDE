@@ -176,9 +176,15 @@ echo '
 #  Server For Nyarch
 [nyarch-repo]
 Include = /etc/pacman.d/mirrorlist-nyarch' | sudo tee -a /etc/pacman.conf 
+
+echo '
+Server = https://de-pkgmirror.nyarchlinux.moe/$arch/
+Server = http://nymirror.nyarchlinux.moe/pub/linux/nyarch/
+Server = https://mousecorp.xyz/pub/linux/nyarch/packages/$arch/
+' | sudo tee /etc/pacman.d/mirrorlist-nyarch
 }
 install_nyarch_apps() {
-  
+
 }
 
 install_nyarch_updater() {
