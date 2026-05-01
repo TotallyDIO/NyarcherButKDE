@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION= 26.04
+VERSION=26.04
 LATEST_TAG_VERSION=`curl -s https://api.github.com/repos/NyarchLinux/NyarchLinux/releases/latest | grep "tag_name" | awk -F'"' '/tag_name/ {print $4}'`
 RELEASE_LINK="https://github.com/NyarchLinux/NyarchLinux/archive/refs/tags/"
 
