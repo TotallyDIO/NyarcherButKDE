@@ -1,7 +1,8 @@
 #!/bin/bash
+
 VERSION= 26.04
 LATEST_TAG_VERSION=`curl -s https://api.github.com/repos/NyarchLinux/NyarchLinux/releases/latest | grep "tag_name" | awk -F'"' '/tag_name/ {print $4}'`
-RELEASE_LINK="github.com/NyarchLinux/NyarchLinux/releases/latest/download/"
+RELEASE_LINK="https://github.com/NyarchLinux/NyarchLinux/archive/refs/tags/"
 
 RED='\033[0;31m'
 NC='\033[0m'
@@ -31,8 +32,8 @@ check_gnome_is_running() {
 
 get_tarball() {
   if [ "$tarball_downloaded" = "false" ]; then
-    file_path=/tmp/NyarchLinux-26.04.tar.gz
-    url=${RELEASE_LINK}NyarchLinux-26.04.tar.gz
+    file_path=/tmp/NyarchLinux-$VERSION.tar.gz
+    url=${RELEASE_LINK}$VERSION.tar.gz
 
     echo "Downloading Nyarch tarball from $url"
     wget -q -O "$file_path" "$url"
@@ -70,7 +71,7 @@ install_extensions () {
   chmod -R 755 $HOME/.local/share/gnome-shell/extensions/*
   
   # Install material you icons 
-  cp -rf /tmp/NyarchLinuxComp/Gnome/etc/skel/.config/nyarch ~/.config
+  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.config/nyarch ~/.config
   cd ~/.config/nyarch
   git clone https://github.com/vinceliuice/Tela-circle-icon-theme
 }
@@ -79,8 +80,8 @@ install_nyaofetch() {
   get_tarball
   cd /usr/bin # Install nekofetch and nyaofetch
   # Download scripts
-  sudo cp -rf /tmp/NyarchLinuxComp/Gnome/usr/local/bin/nekofetch .
-  sudo cp -rf /tmp/NyarchLinuxComp/Gnome/usr/local/bin/nyaofetch .
+  sudo cp -rf /tmp/NyarchLinux-$VERSION/Gnome/usr/local/bin/nekofetch .
+  sudo cp -rf /tmp/NyarchLinux-$VERSION/Gnome/usr/local/bin/nyaofetch .
   # Give the user execution permissions
   sudo chmod +x nekofetch
   sudo chmod +x nyaofetch
@@ -90,7 +91,7 @@ configure_neofetch() {
   get_tarball
   mv ~/.config/fastfetch ~/.config/fastfetch-backup  # Backup previous fastfetch
   # Install new fastfetch files
-  cp -rf /tmp/NyarchLinuxComp/Gnome/etc/skel/.config/fastfetch ~/.config
+  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.config/fastfetch ~/.config
 }
 
 download_wallpapers() {
@@ -104,7 +105,7 @@ download_wallpapers() {
 
   # installs the rest
   cd $HOME/.local/share/
-  cp -rf /tmp/NyarchLinuxComp/Gnome/etc/skel/.local/share/backgrounds .
+  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.local/share/backgrounds .
 
 }
 
@@ -120,20 +121,20 @@ set_themes() {
   get_tarball
   cd ~/.local/share
   mv themes themes-backup  # Backup icons
-  cp -rf /tmp/NyarchLinuxComp/Gnome/etc/skel/.local/share/themes ~/.local/share
+  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.local/share/themes ~/.local/share
   cd ~/.config
   # Set GTK4 and GTK3 themes
   mv gtk-3.0 gtk-3.0-backup
   mv gtk-4.0 gtk-4.0-backup
-  cp -rf /tmp/NyarchLinuxComp/Gnome/etc/skel/.config/gtk-3.0 ~/.config
-  cp -rf /tmp/NyarchLinuxComp/Gnome/etc/skel/.config/gtk-4.0 ~/.config
+  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.config/gtk-3.0 ~/.config
+  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.config/gtk-4.0 ~/.config
 }
 
 configure_kitty (){
   get_tarball
   cd ~/.config/
   mv ~/.config/kitty/kitty.conf kitty-backup.conf
-  cp -rf /tmp/NyarchLinuxComp/Gnome/etc/skel/.config/kitty/ .
+  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.config/kitty/ .
 }
 
 flatpak_overrides() {
@@ -146,7 +147,7 @@ flatpak_overrides() {
 #  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 #  flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 #  # Install latest release of everything
-#  cd /tmp/NyarchLinuxComp/Gnome/
+#  cd /tmp/NyarchLinux-$VERSION/Gnome/
 #  sh install_flatpaks.sh
 #}
 install_flatpaks() {
@@ -199,7 +200,7 @@ configure_gsettings() {
   check_gnome_is_running
   get_tarball
   dconf dump / > ~/dconf-backup.txt  # Save old gnome settings
-  cd /tmp/NyarchLinuxComp/Gnome/etc/dconf/db/local.d
+  cd /tmp/NyarchLinux-$VERSION/Gnome/etc/dconf/db/local.d
   # Load settings
   dconf load / < 06-extensions  # Load extensions settings
   dconf load / < 02-interface  # Load theme settings
