@@ -4,8 +4,9 @@ LATEST_TAG_VERSION=`curl -s https://api.github.com/repos/NyarchLinux/NyarchLinux
 
 
 
-WALLPAPER_LINK="github.com/TotallyDIO/NyarchKDE/archive/refs/tags/$LATEST_TAG_VERSION/wallpaper.tar.gz"
+WALLPAPER_LINK="github.com/TotallyDIO/NyarchWallpapers/blob/main/$LATEST_TAG_VERSION/wallpapers.tar.gz"
 
+ICON_LINK=https://github.com/TotallyDIO/NyarchWallpapers/blob/main/$LATEST_TAG_VERSION/icons.tar.gz
 
 RELEASE_LINK="github.com/NyarchLinux/NyarchLinux/archive/refs/tags/$LATEST_TAG_VERSION/"
 
@@ -44,8 +45,8 @@ check_gnome_is_running() {
 
 get_tarball() {
   if [ "$tarball_downloaded" = "false" ]; then
-    file_path=/tmp/NyarchLinux-$VERSION.tar.gz
-    url=${RELEASE_LINK}$VERSION.tar.gz
+    file_path=/tmp/NyarchLinux-$LATEST_TAG_VERSION.tar.gz
+    url=${RELEASE_LINK}$LATEST_TAG_VERSION.tar.gz
 
     echo "Downloading Nyarch tarball from $url"
     wget -q -O "$file_path" "$url"
@@ -84,7 +85,7 @@ install_extensions () {
   chmod -R 755 $HOME/.local/share/gnome-shell/extensions/*
   
   # Install material you icons 
-  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.config/nyarch ~/.config
+  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.config/nyarch ~/.config
   cd ~/.config/nyarch
   git clone https://github.com/vinceliuice/Tela-circle-icon-theme
 }
@@ -93,8 +94,8 @@ install_nyaofetch() {
   get_tarball
   cd /usr/bin # Install nekofetch and nyaofetch
   # Download scripts
-  sudo cp -rf /tmp/NyarchLinux-$VERSION/Gnome/usr/local/bin/nekofetch .
-  sudo cp -rf /tmp/NyarchLinux-$VERSION/Gnome/usr/local/bin/nyaofetch .
+  sudo cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/usr/local/bin/nekofetch .
+  sudo cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/usr/local/bin/nyaofetch .
   # Give the user execution permissions
   sudo chmod +x nekofetch
   sudo chmod +x nyaofetch
@@ -104,28 +105,28 @@ configure_neofetch() {
   get_tarball
   mv ~/.config/fastfetch ~/.config/fastfetch-backup  # Backup previous fastfetch
   # Install new fastfetch files
-  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.config/fastfetch ~/.config
+  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.config/fastfetch ~/.config
 }
 
 download_wallpapers() {
   get_tarball
   # download and install latest wallpaper
   cd /tmp
-  wget ${RELEASE_LINK}wallpaper.tar.gz
-  tar -xvf wallpaper.tar.gz
-  cd wallpaper
+  wget ${WALLPAPER_LINK}
+  tar -xvf wallpapers.tar.gz
+  cd wallpapers
   sh install.sh
 
   # installs the rest
   cd $HOME/.local/share/
-  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.local/share/backgrounds .
+  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.local/share/backgrounds .
 
 }
 
 # TODO CONTINUE
 download_icons() {
   cd /tmp
-  wget ${RELEASE_LINK}icons.tar.gz
+  wget $ICON_LINK
   tar -xvf icons.tar.gz
   cp -rf Tela-circle-MaterialYou* ~/.local/share/icons/ #you may want to update the number (Tela-circle-MaterialYou-6d3900)
 }
@@ -134,20 +135,20 @@ set_themes() {
   get_tarball
   cd ~/.local/share
   mv themes themes-backup  # Backup icons
-  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.local/share/themes ~/.local/share
+  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.local/share/themes ~/.local/share
   cd ~/.config
   # Set GTK4 and GTK3 themes
   mv gtk-3.0 gtk-3.0-backup
   mv gtk-4.0 gtk-4.0-backup
-  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.config/gtk-3.0 ~/.config
-  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.config/gtk-4.0 ~/.config
+  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.config/gtk-3.0 ~/.config
+  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.config/gtk-4.0 ~/.config
 }
 
 configure_kitty (){
   get_tarball
   cd ~/.config/
   mv ~/.config/kitty/kitty.conf kitty-backup.conf
-  cp -rf /tmp/NyarchLinux-$VERSION/Gnome/etc/skel/.config/kitty/ .
+  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.config/kitty/ .
 }
 
 flatpak_overrides() {
@@ -160,7 +161,7 @@ flatpak_overrides() {
 #  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 #  flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 #  # Install latest release of everything
-#  cd /tmp/NyarchLinux-$VERSION/Gnome/
+#  cd /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/
 #  sh install_flatpaks.sh
 #}
 install_flatpaks() {
@@ -213,7 +214,7 @@ configure_gsettings() {
   check_gnome_is_running
   get_tarball
   dconf dump / > ~/dconf-backup.txt  # Save old gnome settings
-  cd /tmp/NyarchLinux-$VERSION/Gnome/etc/dconf/db/local.d
+  cd /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/dconf/db/local.d
   # Load settings
   dconf load / < 06-extensions  # Load extensions settings
   dconf load / < 02-interface  # Load theme settings
