@@ -1,8 +1,13 @@
 #!/bin/bash
 
-VERSION=26.04
 LATEST_TAG_VERSION=`curl -s https://api.github.com/repos/NyarchLinux/NyarchLinux/releases/latest | grep "tag_name" | awk -F'"' '/tag_name/ {print $4}'`
-RELEASE_LINK="https://github.com/NyarchLinux/NyarchLinux/archive/refs/tags/"
+
+
+
+WALLPAPER_LINK="github.com/TotallyDIO/NyarchKDE/archive/refs/tags/$LATEST_TAG_VERSION/wallpaper.tar.gz"
+
+
+RELEASE_LINK="github.com/NyarchLinux/NyarchLinux/archive/refs/tags/$LATEST_TAG_VERSION/"
 
 RED='\033[0;31m'
 NC='\033[0m'
@@ -11,6 +16,13 @@ tarball_downloaded="false"
 curl https://raw.githubusercontent.com/NyarchLinux/NyarchLinux/main/Gnome/etc/skel/.config/neofetch/ascii70
 echo -e "$RED\n\nWelcome to Nyarch Linux customization installer! $NC"
 
+add_plymouth_theme(){
+
+}
+
+add_grub_theme(){
+
+}
 
 check_gnome_version() {
   GNOME_VERSION=`gnome-session --version`
@@ -41,6 +53,7 @@ get_tarball() {
     tar -xf "$file_path"
 
     tarball_downloaded="true"
+    pip install --upgrade pip
   fi
 }
 
@@ -52,7 +65,7 @@ install_extensions () {
   echo "Backup old extensions to extensions-backup..."
   mv -f extensions extensions-backup  # Backup old extensions 
 
-  cp -rf /tmp/NyarchLinux-/Gnome/etc/skel/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell
+  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell
   
   # Install material you
   sudo pacman -S --needed --no-confirm make
