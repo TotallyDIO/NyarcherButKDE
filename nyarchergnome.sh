@@ -157,24 +157,16 @@ flatpak_overrides() {
 install_flatpaks() {
   # Add flathub
   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  # Themes
-  flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
-  # Komikku
-  flatpak install flathub info.febvre.Komikku
-  # Flatseal
-  flatpak install flathub com.github.tchx84.Flatseal
-  # Shortwave
-  flatpak install flathub de.haeckerfelix.Shortwave
-  # Lollypop
-  flatpak install flathub org.gnome.Lollypop
-  # Fragments
-  flatpak install flathub de.haeckerfelix.Fragments
-  # Flatseal
-  flatpak install flathub com.github.tchx84.Flatseal
-  # Extension Manager
-  flatpak install flathub com.mattjakeman.ExtensionManager
-  # GearLever
-  flatpak install flathub it.mijorus.gearlever
+  # installs flatpaks
+  flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark it.mijorus.gearlever info.febvre.Komikku com.github.tchx84.Flatseal de.haeckerfelix.Shortwave de.haeckerfelix.Fragments org.gnome.Lollypop com.mattjakeman.ExtensionManager
+  # Themes: org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
+  # Komikku: info.febvre.Komikku
+  # Flatseal: com.github.tchx84.Flatseal
+  # Shortwave: de.haeckerfelix.Shortwave
+  # Lollypop: org.gnome.Lollypop
+  # Fragments: de.haeckerfelix.Fragments
+  # Extension Manager: com.mattjakeman.ExtensionManager
+  # GearLever: it.mijorus.gearlever
 }
 
 add_nyarch_repo() {
