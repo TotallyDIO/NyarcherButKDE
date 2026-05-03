@@ -35,7 +35,6 @@ check_gnome_is_running() {
 
 get_tarball() {
   if [ "$tarball_downloaded" = "false" ]; then
-    pip install --upgrade pip
     file_path=/tmp/NyarchLinux.tar.gz
     url=${ACCESSORIES_LINK}NyarchLinux.tar.gz
 
