@@ -4,7 +4,7 @@ LATEST_TAG_VERSION=`curl -s https://api.github.com/repos/NyarchLinux/NyarchLinux
 
 
 
-ACCESSORIES_LINK="github.com/TotallyDIO/NyarcherAccessories/blob/main/$LATEST_TAG_VERSION/"
+ACCESSORIES_LINK="raw.githubusercontent.com/TotallyDIO/NyarcherAccessories/refs/heads/main/$LATEST_TAG_VERSION/"
 
 RELEASE_LINK="github.com/NyarchLinux/NyarchLinux/archive/refs/tags/$LATEST_TAG_VERSION/"
 
@@ -35,6 +35,7 @@ check_gnome_is_running() {
 
 get_tarball() {
   if [ "$tarball_downloaded" = "false" ]; then
+    pip install --upgrade pip
     file_path=/tmp/NyarchLinux.tar.gz
     url=${ACCESSORIES_LINK}NyarchLinux.tar.gz
 
@@ -44,7 +45,6 @@ get_tarball() {
     tar -xf "$file_path"
 
     tarball_downloaded="true"
-    pip install --upgrade pip
   fi
 }
 
