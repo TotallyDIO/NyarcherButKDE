@@ -4,7 +4,7 @@ LATEST_TAG_VERSION=`curl -s https://api.github.com/repos/NyarchLinux/NyarchLinux
 
 
 
-ACCESSORIES_LINK="github.com/TotallyDIO/NyarchWallpapers/blob/main/$LATEST_TAG_VERSION/"
+ACCESSORIES_LINK="github.com/TotallyDIO/NyarchAccessories/blob/main/$LATEST_TAG_VERSION/"
 
 RELEASE_LINK="github.com/NyarchLinux/NyarchLinux/archive/refs/tags/$LATEST_TAG_VERSION/"
 
@@ -35,7 +35,7 @@ check_gnome_is_running() {
 
 get_tarball() {
   if [ "$tarball_downloaded" = "false" ]; then
-    file_path=/tmp/NyarchLinux-$LATEST_TAG_VERSION.tar.gz
+    file_path=/tmp/NyarchLinux.tar.gz
     url=${ACCESSORIES_LINK}$LATEST_TAG_VERSION.tar.gz
 
     echo "Downloading Nyarch tarball from $url"
