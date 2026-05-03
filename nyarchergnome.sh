@@ -93,6 +93,7 @@ install_nyaofetch() {
 
 configure_neofetch() {
   get_tarball
+  mkdir -p ~/.config/fastfetch
   mv ~/.config/fastfetch ~/.config/fastfetch-backup  # Backup previous fastfetch
   # Install new fastfetch files
   cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.config/fastfetch ~/.config
