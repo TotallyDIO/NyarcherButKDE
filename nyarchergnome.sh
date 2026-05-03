@@ -4,9 +4,7 @@ LATEST_TAG_VERSION=`curl -s https://api.github.com/repos/NyarchLinux/NyarchLinux
 
 
 
-WALLPAPER_LINK="github.com/TotallyDIO/NyarchWallpapers/blob/main/$LATEST_TAG_VERSION/wallpapers.tar.gz"
-
-ICON_LINK=https://github.com/TotallyDIO/NyarchWallpapers/blob/main/$LATEST_TAG_VERSION/icons.tar.gz
+ACCESSORIES_LINK="github.com/TotallyDIO/NyarchWallpapers/blob/main/$LATEST_TAG_VERSION/"
 
 RELEASE_LINK="github.com/NyarchLinux/NyarchLinux/archive/refs/tags/$LATEST_TAG_VERSION/"
 
@@ -16,14 +14,6 @@ tarball_downloaded="false"
 
 curl https://raw.githubusercontent.com/NyarchLinux/NyarchLinux/main/Gnome/etc/skel/.config/neofetch/ascii70
 echo -e "$RED\n\nWelcome to Nyarch Linux customization installer! $NC"
-
-add_plymouth_theme(){
-
-}
-
-add_grub_theme(){
-
-}
 
 check_gnome_version() {
   GNOME_VERSION=`gnome-session --version`
@@ -46,7 +36,7 @@ check_gnome_is_running() {
 get_tarball() {
   if [ "$tarball_downloaded" = "false" ]; then
     file_path=/tmp/NyarchLinux-$LATEST_TAG_VERSION.tar.gz
-    url=${RELEASE_LINK}$LATEST_TAG_VERSION.tar.gz
+    url=${ACCESSORIES_LINK}$LATEST_TAG_VERSION.tar.gz
 
     echo "Downloading Nyarch tarball from $url"
     wget -q -O "$file_path" "$url"
@@ -112,7 +102,7 @@ download_wallpapers() {
   get_tarball
   # download and install latest wallpaper
   cd /tmp
-  wget ${WALLPAPER_LINK}
+  wget ${ACCESSORIES_LINK}wallpapers.tar.gz
   tar -xvf wallpapers.tar.gz
   cd wallpapers
   sh install.sh
@@ -126,7 +116,7 @@ download_wallpapers() {
 # TODO CONTINUE
 download_icons() {
   cd /tmp
-  wget $ICON_LINK
+  wget ${ACCESSORIES_LINK}icons.tar.gz
   tar -xvf icons.tar.gz
   cp -rf Tela-circle-MaterialYou* ~/.local/share/icons/ #you may want to update the number (Tela-circle-MaterialYou-6d3900)
 }
