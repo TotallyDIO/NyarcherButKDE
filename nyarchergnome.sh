@@ -4,7 +4,7 @@ LATEST_TAG_VERSION=`curl -s https://api.github.com/repos/NyarchLinux/NyarchLinux
 
 
 
-ACCESSORIES_LINK="github.com/TotallyDIO/NyarchAccessories/blob/main/$LATEST_TAG_VERSION/"
+ACCESSORIES_LINK="github.com/TotallyDIO/NyarcherAccessories/blob/main/$LATEST_TAG_VERSION/"
 
 RELEASE_LINK="github.com/NyarchLinux/NyarchLinux/archive/refs/tags/$LATEST_TAG_VERSION/"
 
