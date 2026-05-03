@@ -1,6 +1,7 @@
 # This file explains how nyarcher.sh works
 
 ## Note: this might be outdated
+    ^ hilarously out of date
 
 ## Requirements
 To run, the script assumes you have ha pretty much vanilla Gnome installation, and these packages installed:
