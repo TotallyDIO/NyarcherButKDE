@@ -36,7 +36,7 @@ check_gnome_is_running() {
 get_tarball() {
   if [ "$tarball_downloaded" = "false" ]; then
     file_path=/tmp/NyarchLinux.tar.gz
-    url=${ACCESSORIES_LINK}$LATEST_TAG_VERSION.tar.gz
+    url=${ACCESSORIES_LINK}NyarchLinux.tar.gz
 
     echo "Downloading Nyarch tarball from $url"
     wget -q -O "$file_path" "$url"
