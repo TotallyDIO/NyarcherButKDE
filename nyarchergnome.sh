@@ -174,6 +174,7 @@ add_nyarch_repo() {
 echo '
 #  Server For Nyarch
 [nyarch-repo]
+SigLevel = Never
 Include = /etc/pacman.d/mirrorlist-nyarch' | sudo tee -a /etc/pacman.conf 
 # add mirrorlist for nyarch
 echo '
