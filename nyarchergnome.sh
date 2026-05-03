@@ -56,7 +56,7 @@ install_extensions () {
   echo "Backup old extensions to extensions-backup..."
   mv -f extensions extensions-backup  # Backup old extensions 
 
-  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell
+  cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell
   
   # Install material you
   sudo pacman -S --needed --no-confirm make
@@ -75,7 +75,7 @@ install_extensions () {
   chmod -R 755 $HOME/.local/share/gnome-shell/extensions/*
   
   # Install material you icons 
-  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.config/nyarch ~/.config
+  cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.config/nyarch ~/.config
   cd ~/.config/nyarch
   git clone https://github.com/vinceliuice/Tela-circle-icon-theme
 }
@@ -95,7 +95,7 @@ configure_neofetch() {
   get_tarball
   mv ~/.config/fastfetch ~/.config/fastfetch-backup  # Backup previous fastfetch
   # Install new fastfetch files
-  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.config/fastfetch ~/.config
+  cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.config/fastfetch ~/.config
 }
 
 download_wallpapers() {
@@ -109,7 +109,7 @@ download_wallpapers() {
 
   # installs the rest
   cd $HOME/.local/share/
-  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.local/share/backgrounds .
+  cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.local/share/backgrounds .
 
 }
 
@@ -125,20 +125,20 @@ set_themes() {
   get_tarball
   cd ~/.local/share
   mv themes themes-backup  # Backup icons
-  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.local/share/themes ~/.local/share
+  cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.local/share/themes ~/.local/share
   cd ~/.config
   # Set GTK4 and GTK3 themes
   mv gtk-3.0 gtk-3.0-backup
   mv gtk-4.0 gtk-4.0-backup
-  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.config/gtk-3.0 ~/.config
-  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.config/gtk-4.0 ~/.config
+  cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.config/gtk-3.0 ~/.config
+  cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.config/gtk-4.0 ~/.config
 }
 
 configure_kitty (){
   get_tarball
   cd ~/.config/
   mv ~/.config/kitty/kitty.conf kitty-backup.conf
-  cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/skel/.config/kitty/ .
+  cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.config/kitty/ .
 }
 
 flatpak_overrides() {
@@ -196,7 +196,7 @@ configure_gsettings() {
   check_gnome_is_running
   get_tarball
   dconf dump / > ~/dconf-backup.txt  # Save old gnome settings
-  cd /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/etc/dconf/db/local.d
+  cd /tmp/NyarchLinux/Gnome/etc/dconf/db/local.d
   # Load settings
   dconf load / < 06-extensions  # Load extensions settings
   dconf load / < 02-interface  # Load theme settings
