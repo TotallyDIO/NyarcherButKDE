@@ -84,8 +84,8 @@ install_nyaofetch() {
   get_tarball
   cd /usr/bin # Install nekofetch and nyaofetch
   # Download scripts
-  sudo cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/usr/local/bin/nekofetch .
-  sudo cp -rf /tmp/NyarchLinux-$LATEST_TAG_VERSION/Gnome/usr/local/bin/nyaofetch .
+  sudo cp -rf /tmp/NyarchLinux/Gnome/usr/local/bin/nekofetch .
+  sudo cp -rf /tmp/NyarchLinux/Gnome/usr/local/bin/nyaofetch .
   # Give the user execution permissions
   sudo chmod +x nekofetch
   sudo chmod +x nyaofetch
