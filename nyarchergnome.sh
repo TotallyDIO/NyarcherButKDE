@@ -158,7 +158,7 @@ install_flatpaks() {
   # Add flathub
   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   # installs flatpaks
-  flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark it.mijorus.gearlever info.febvre.Komikku com.github.tchx84.Flatseal de.haeckerfelix.Shortwave de.haeckerfelix.Fragments org.gnome.Lollypop com.mattjakeman.ExtensionManager
+  flatpak install org.gnome.Platform/x86_64/50 org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark it.mijorus.gearlever info.febvre.Komikku com.github.tchx84.Flatseal de.haeckerfelix.Shortwave de.haeckerfelix.Fragments org.gnome.Lollypop com.mattjakeman.ExtensionManager
   # Themes: org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
   # Komikku: info.febvre.Komikku
   # Flatseal: com.github.tchx84.Flatseal
@@ -231,6 +231,13 @@ then
   echo "Gnome extensions installed!"
 fi
 
+read -r -p "Do you want to install suggested flatpaks to enhance your weebflow (You will be able to not download only some of them)? (Y/n): " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+  install_flatpaks
+  echo "Suggested apps installed!"
+fi
+
 read -r -p "[SYSTEM] Do you want to install Nekofetch and Nyaofetch and configure neofetch, to tell everyone that you use nyarch btw? (Y/n): " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
@@ -281,12 +288,6 @@ then
   echo "Flatpak themes configured!"
 fi
 
-read -r -p "Do you want to install suggested flatpaks to enhance your weebflow (You will be able to not download only some of them)? (Y/n): " response
-if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
-then
-  install_flatpaks
-  echo "Suggested apps installed!"
-fi
 read -r -p "[SYSTEM] Do you want to install Nyarch Exclusive applications? (Y/n): " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
