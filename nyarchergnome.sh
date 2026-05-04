@@ -237,6 +237,7 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
   install_flatpaks
   echo "Suggested apps installed!"
+fi
 
 read -r -p "Do you want to edit your Gnome settings? Note that if you have not installed something before, you may experience some bugs at the start (Y/n): " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
