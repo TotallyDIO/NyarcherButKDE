@@ -58,6 +58,7 @@ install_extensions () {
   cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell
   
   # Install material you
+  mkdir -p $HOME/.local/share/gnome-shell/extentions
   sudo pacman -S --needed make
   cd /tmp
   git clone https://github.com/FrancescoCaracciolo/material-you-colors.git
