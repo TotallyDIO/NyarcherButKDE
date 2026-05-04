@@ -59,7 +59,7 @@ install_extensions () {
   
   # Install material you
   mkdir -p $HOME/.local/share/gnome-shell/extentions
-  sudo pacman -S --needed make
+  sudo pacman -S --needed --noconfirm make
   cd /tmp
   git clone https://github.com/FrancescoCaracciolo/material-you-colors.git
   cd material-you-colors
@@ -159,7 +159,7 @@ install_flatpaks() {
   # Add flathub
   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   # installs flatpaks
-  flatpak install org.gnome.Platform/x86_64/50 org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark it.mijorus.gearlever info.febvre.Komikku com.github.tchx84.Flatseal de.haeckerfelix.Shortwave de.haeckerfelix.Fragments org.gnome.Lollypop com.mattjakeman.ExtensionManager
+  flatpak install org.gnome.Platform/x86_64/49 org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark it.mijorus.gearlever info.febvre.Komikku com.github.tchx84.Flatseal de.haeckerfelix.Shortwave de.haeckerfelix.Fragments org.gnome.Lollypop com.mattjakeman.ExtensionManager
   # Themes: org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
   # Komikku: info.febvre.Komikku
   # Flatseal: com.github.tchx84.Flatseal
@@ -237,6 +237,12 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
   install_flatpaks
   echo "Suggested apps installed!"
+
+read -r -p "Do you want to edit your Gnome settings? Note that if you have not installed something before, you may experience some bugs at the start (Y/n): " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+  configure_gsettings
+  echo "Gnome settings updated"
 fi
 
 read -r -p "[SYSTEM] Do you want to install Nekofetch and Nyaofetch and configure neofetch, to tell everyone that you use nyarch btw? (Y/n): " response
@@ -294,13 +300,6 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
   install_nyarch_apps
   echo "Nyarch apps installed!"
-fi
-
-read -r -p "Do you want to edit your Gnome settings? Note that if you have not installed something before, you may experience some bugs at the start (Y/n): " response
-if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
-then
-  configure_gsettings
-  echo "Gnome settings updated"
 fi
 
 echo -e "$RED Log out and login to see the results! $NC"
