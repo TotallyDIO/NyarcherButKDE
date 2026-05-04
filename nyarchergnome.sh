@@ -32,7 +32,7 @@ check_gnome_is_running() {
     exit
   fi
 }
-
+# works
 get_tarball() {
   if [ "$tarball_downloaded" = "false" ]; then
     file_path=/tmp/NyarchLinux.tar.gz
@@ -46,7 +46,7 @@ get_tarball() {
     tarball_downloaded="true"
   fi
 }
-
+# works
 install_extensions () {
   check_gnome_version
   check_gnome_is_running
@@ -58,7 +58,7 @@ install_extensions () {
   cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell
   
   # Install material you
-  sudo pacman -S --needed --no-confirm make
+  sudo pacman -S --needed make
   cd /tmp
   git clone https://github.com/FrancescoCaracciolo/material-you-colors.git
   cd material-you-colors
