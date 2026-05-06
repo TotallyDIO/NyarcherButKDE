@@ -124,7 +124,7 @@ download_icons() {
 
 set_themes() {
   get_tarball
-  mkdir -p ~/.local/themes
+  mkdir -p ~/.local/share/themes
   mkdir -p ~/.config/gtk-3.0
   mkdir -p ~/.config/gtk-4.0
   cd ~/.local/share
@@ -141,6 +141,7 @@ set_themes() {
 configure_kitty (){
   get_tarball
   cd ~/.config/
+  mkdir -p ~/.config/kitty
   mv ~/.config/kitty/kitty.conf kitty-backup.conf
   cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.config/kitty/ .
 }
