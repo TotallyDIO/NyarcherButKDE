@@ -46,6 +46,26 @@ get_tarball() {
     tarball_downloaded="true"
   fi
 }
+
+set_plymouth_theme() {
+  #experimental.
+  get_tarball
+  cd /tmp/NyarchLinux/Gnome/usr/share/plymouth/themes
+  sudo cp -rf nyarch-plymouth-theme /usr/share/plymouth/themes/
+  sudo plymouth-set-default-theme -R nyarch-plymouth-theme
+}
+
+set_grub_theme() {
+  #experimental.
+  get_tarball
+  cd /tmp/NyarchLinux/Gnome/usr/share/grub/themes
+  sudo cp -rf nyarch-grub-theme /usr/share/grub/themes/
+  # Set grub theme
+  sudo sed -i 's/GRUB_THEME=.*/GRUB_THEME="\/usr\/share\/grub\/themes\/nyarch-grub-theme\/theme.txt"/g' /etc/default/grub
+  # Update grub
+  sudo grub-mkconfig -o /boot/grub/grub.cfg
+}
+
 # works
 install_extensions () {
   check_gnome_version
