@@ -124,6 +124,9 @@ download_icons() {
 
 set_themes() {
   get_tarball
+  mkdir -p ~/.local/themes
+  mkdir -p ~/.config/gtk-3.0
+  mkdir -p ~/.config/gtk-4.0
   cd ~/.local/share
   mv themes themes-backup  # Backup icons
   cp -rf /tmp/NyarchLinux/Gnome/etc/skel/.local/share/themes ~/.local/share
